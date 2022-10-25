@@ -1,0 +1,5 @@
+CREATE TABLE foos (
+  id TEXT NOT NULL PRIMARY KEY,
+  name TEXT NOT NULL,
+  updated_at DATETIME NOT NULL
+);
