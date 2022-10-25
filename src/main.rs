@@ -1,32 +1,19 @@
-use std::str::FromStr;
+use sqlx::types::chrono::NaiveDateTime;
 
-use sqlx::{sqlite::SqliteConnectOptions, types::chrono::NaiveDateTime, ConnectOptions};
+struct Foo {
+    id: String,
+    name: String,
+    updated_at: NaiveDateTime,
+}
 
-#[tokio::main]
-async fn main() -> anyhow::Result<()> {
-    let mut connection = SqliteConnectOptions::from_str("db.sqlite3")?
-        .connect()
-        .await?;
-
-    struct Foo {
-        id: String,
-        name: String,
-        updated_at: NaiveDateTime,
-    }
-
-    let foos = sqlx::query_as!(
+fn main() {
+    sqlx::query_as!(
         Foo,
         r#"
             SELECT *
             FROM foos
             ORDER BY updated_at DESC
-            LIMIT ?
+            LIMIT 10
         "#,
-        10
-    )
-    .fetch_all(&mut connection)
-    .await
-    .expect("Failed to fetch last 10");
-
-    Ok(())
+    );
 }

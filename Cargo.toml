@@ -8,4 +8,3 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.66"
 sqlx = { version = "0.6.2", features = ["chrono", "sqlite", "macros", "runtime-tokio-rustls"] }
-tokio = { version = "1.21.2", features = ["rt", "macros"] }
