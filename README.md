@@ -3,6 +3,8 @@
 This is a minimal example of an issue I'm having with SQLx and Sqlite when using `ORDER BY` and `LIMIT`.
 SQLx incorrectly decides that `NOT NULL` fields should map to `Option<T>`.
 
+Using git bisect, I found that this issue was introduced in commit [ed566225](https://github.com/launchbadge/sqlx/commit/ed56622526298cd1df52338892dd5c6c9553b6d2).
+
 ## Run reproduction
 
 ```bash
