@@ -1,22 +1,14 @@
-use std::{env, str::FromStr};
+use std::str::FromStr;
 
-use sqlx::{
-    migrate::Migrator, sqlite::SqliteConnectOptions, types::chrono::NaiveDateTime, ConnectOptions,
-};
-
-static MIGRATOR: Migrator = sqlx::migrate!();
+use sqlx::{sqlite::SqliteConnectOptions, types::chrono::NaiveDateTime, ConnectOptions};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    dotenv::dotenv().unwrap();
-    let url = env::var("DATABASE_URL").unwrap();
+    let url = "db.sqlite3";
     let mut connection = SqliteConnectOptions::from_str(&url)?
         .create_if_missing(true)
         .connect()
         .await?;
-
-    MIGRATOR.run(&mut connection).await?;
-
     struct Foo {
         id: String,
         name: String,

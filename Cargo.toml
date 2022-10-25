@@ -7,7 +7,5 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.66"
-dotenv = "0.15.0"
-serde = { version = "1.0.147", features = ["derive"] }
-sqlx = { version = "0.6.2", features = ["chrono", "sqlite", "uuid", "offline", "macros", "runtime-tokio-rustls"] }
-tokio = { version = "1.21.2", features = ["full"] }
+sqlx = { version = "0.6.2", features = ["chrono", "sqlite", "macros", "runtime-tokio-rustls"] }
+tokio = { version = "1.21.2", features = ["rt", "macros"] }
