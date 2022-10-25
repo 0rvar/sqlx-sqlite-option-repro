@@ -4,11 +4,10 @@ use sqlx::{sqlite::SqliteConnectOptions, types::chrono::NaiveDateTime, ConnectOp
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let url = "db.sqlite3";
-    let mut connection = SqliteConnectOptions::from_str(&url)?
-        .create_if_missing(true)
+    let mut connection = SqliteConnectOptions::from_str("db.sqlite3")?
         .connect()
         .await?;
+
     struct Foo {
         id: String,
         name: String,
